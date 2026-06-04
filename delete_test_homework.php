@@ -6,8 +6,10 @@ header('Access-Control-Allow-Origin: *');
 // Plik z połączeniem bazy danych
 require_once 'db_connection.php';
 
-// Sprawdzenie czy żądanie jest metodą GET
-if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+header('Access-Control-Allow-Methods: DELETE');
+
+// Sprawdzenie czy żądanie jest metodą DELETE
+if ($_SERVER['REQUEST_METHOD'] === 'DELETE') {
     // Sprawdzenie czy wszystkie wymagane pola są obecne
     if (!isset($_GET['event_id']) || empty($_GET['event_id'])) {
         echo json_encode(['status' => 'error', 'message' => 'Brak ID wydarzenia.']);

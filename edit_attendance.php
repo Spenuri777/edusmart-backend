@@ -2,14 +2,14 @@
 // Ustawienie nagłówków odpowiedzi HTTP
 header("Content-Type: application/json; charset=UTF-8"); // Typ odpowiedzi jako JSON
 header('Access-Control-Allow-Origin: *');
-header('Access-Control-Allow-Methods: POST'); // Ustawienie dozwolonej metody na POST
+header('Access-Control-Allow-Methods: PUT'); // Ustawienie dozwolonej metody na PUT
 header('Access-Control-Allow-Headers: Content-Type');
 
 // Plik z połączeniem bazy danych
 require_once 'db_connection.php';
 
-// Sprawdzenie czy żądanie jest metodą POST
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+// Sprawdzenie czy żądanie jest metodą PUT
+if ($_SERVER['REQUEST_METHOD'] === 'PUT') {
     // Odczytanie danych wejściowych w formacie JSON
     $json = file_get_contents('php://input');
     $data = json_decode($json, true);
@@ -42,7 +42,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         echo json_encode(['status' => 'error', 'message' => 'Nie udało się edytować frekwencji.', 'error' => mysqli_error($conn)]);
     }
 } else {
-    echo json_encode(['status' => 'error', 'message' => 'Nieprawidłowa metoda żądania. Użyj POST.']);
+    echo json_encode(['status' => 'error', 'message' => 'Nieprawidłowa metoda żądania. Użyj PUT.']);
 }
 
 // Zamknięcie połączenia z bazą danych
